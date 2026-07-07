@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 // 상단 아이콘: 강아지(dog1,dog2) → 바닐라/잭슨/쭈니/탁호로 교체
@@ -8,13 +8,40 @@ import Lichard from './assets/리처드.png'
 import takho from './assets/탁호.png'
 import nyc1 from './assets/NYC1.jpg'
 import nyc2 from './assets/NYC2.jpg'
+import leaf from './assets/leaf_transparent.png'
 import './App.css'
 
 type AppProps = {title?: string}
 
 function App({ title }: AppProps) {
-  const [count, setCount] = useState(0)
+  const [visitors, setVisitors] = useState<number | null>(null)
   const [likes, setLikes] = useState(0)
+  const bumpedRef = useRef(false)
+
+  // 사이트 방문 시 방문자 수 자동 증가(전역 카운터 API, 실패하면 localStorage로 대체)
+  useEffect(() => {
+    if (bumpedRef.current) return // StrictMode 중복 실행 방지
+    bumpedRef.current = true
+
+    const KEY = 'village-visitors'
+    ;(async () => {
+      try {
+        const res = await fetch(
+          'https://api.counterapi.dev/v1/yerinkim-uiux01/village-visitors/up'
+        )
+        const data = await res.json()
+        if (typeof data?.count === 'number') {
+          setVisitors(data.count)
+          return
+        }
+      } catch {
+        /* 네트워크/서비스 실패 시 아래 localStorage 사용 */
+      }
+      const local = Number(localStorage.getItem(KEY) ?? '0') + 1
+      localStorage.setItem(KEY, String(local))
+      setVisitors(local)
+    })()
+  }, [])
   return (
     <>
       
@@ -42,41 +69,28 @@ function App({ title }: AppProps) {
           </h1>
           <p>
             {/* [수정] 기존 <code> 태그 제거 → 회색 네모칸 없이 일반 텍스트로 표시 */}
-            저희는 바닐라, 잭슨, 리차드, 탁호와 함께하는 작은 마을입니다. <br />
+            이곳은 바닐라, 잭슨, 리차드, 탁호와 함께하는 작은 마을입니다. <br />
           </p>
         </div>
         {/* [수정] '방문자 숫자'는 볼드(count-text), 숫자만 span으로 감싸 크게/형광색 강조(count-number) */}
         {/* [수정] Visitor Count + count 버튼 + reset를 하나의 카드로 묶음(배경 밝은 회색) */}
         {/* [수정] 카드 + NYC 사진을 가로로 나란히 배치하는 행 */}
         <div className="counter-row">
-        <div className="counter-card">
-        <p className="count-text">
-          이번 달의 방문자 수: <span className="count-number">{count}</span>
-        </p>
-        <div className="button-row">
-          <button
-            type="button"
-            className="count-btn"
-            onClick={() => setCount((count) => count + 1)}
-          >
-            같이 살래!😊
-          </button>
-          <button
-            type="button"
-            className="count-btn"
-            onClick={() => setCount((count) => Math.max(0, count - 1))}
-          >
-            다른 마을로 갈래🥲
-          </button>
-        </div>
-      <div> <button className="reset-btn" onClick={() => setCount(0)}>reset</button> </div>
-        </div>
+        {/* 마을 사진: 왼쪽에 크게 배치 */}
         <div className="counter-photos">
           <div className="photo-images">
             <img src={nyc1} className="side-photo" alt="NYC1" />
             <img src={nyc2} className="side-photo" alt="NYC2" />
           </div>
-          <p className="photo-caption">우리 마을의 모습</p>
+          <p className="photo-caption"> [  마을 사진  ]</p>
+        </div>
+        {/* 방문자 수: 연두색 카드 — 좌상단 텍스트 + 우하단 나뭇잎 + 세로 테이프 */}
+        <div className="visitor-card">
+          <span className="tape"></span>
+          <p className="visitor-label">
+            오늘의 방문자 : <span className="visitor-num">{visitors ?? '…'}</span>
+          </p>
+          <img className="leaf-deco" src={leaf} alt="" />
         </div>
       </div>
       </section>
@@ -92,7 +106,23 @@ function App({ title }: AppProps) {
       </div>
       <div className="card card-yellow">
         <h2 className="card-title"> ❤️ : {likes}</h2>
-        <button className="like-btn" onClick={() => setLikes((likes) => likes + 1)}>이 마을이<br></br>마음에 들어요!</button>
+        <div className="button-row">
+          <button
+            type="button"
+            className="count-btn"
+            onClick={() => setLikes((likes) => likes + 1)}
+          >
+            이 마을에 같이 살래!😊
+          </button>
+          <button
+            type="button"
+            className="count-btn"
+            onClick={() => setLikes((likes) => likes - 1)}
+          >
+            다른 마을로 갈래🥲
+          </button>
+        </div>
+        <button className="reset-btn" onClick={() => setLikes(0)}>reset</button>
       </div>
       </div>
       <div className="ticks"></div>
@@ -124,10 +154,10 @@ function App({ title }: AppProps) {
             <use href="/icons.svg#social-icon"></use>
           </svg>
           <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
+          <p>Join the 'Animal Crossing' community</p>
           <ul>
             <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
+              <a href="https://namu.wiki/w/%EB%AA%A8%EC%97%AC%EB%B4%90%EC%9A%94%20%EB%8F%99%EB%AC%BC%EC%9D%98%20%EC%88%B2" target="_blank">
                 <svg
                   className="button-icon"
                   role="presentation"
@@ -135,7 +165,7 @@ function App({ title }: AppProps) {
                 >
                   <use href="/icons.svg#github-icon"></use>
                 </svg>
-                GitHub
+                Aboutn Animal Crossing
               </a>
             </li>
             <li>

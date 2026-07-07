@@ -59,14 +59,14 @@
 #center {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 75px;            /* 세로 간격 3배(25→75) */
   place-content: center;
   place-items: center;
   flex-grow: 1;
 
   @media (max-width: 1024px) {
     padding: 32px 20px 24px;
-    gap: 18px;
+    gap: 54px;          /* 좁은 화면도 3배(18→54) */
   }
 }
 
@@ -197,18 +197,24 @@
 
 
 .count-text {
-  font-size: 1.25rem;
-  font-weight: 700; /* '방문자 숫자' 텍스트 볼드 처리 */
-  color: #332089;
-  margin: 0 0 16px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;        /* 초록 잎 위에서 읽히도록 흰색 */
+  margin: 0 0 2px;
+  text-align: center;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
-/* 숫자만 강조: 크기 키우고 accent 색상 적용 */
+/* 방문자 숫자 강조(흰색, 크게 가운데) */
 .count-number {
-  font-size: 1.6rem;
+  display: block;
+  font-size: 2.2rem;
   font-weight: 800;
-  color: #7156e9;
-  margin-inline-start: 4px;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .button-row {
@@ -260,7 +266,7 @@
 /* 강아지 아이콘 뒤 배경 영역: 다른 곳과 구분되는 밴드 */
 .dog-band {
   display: inline-block;   /* 강아지 크기만큼만 감싸고 가운데 정렬 */
-  background: #e8eaf6;     /* 연한 남보라 배경 */
+  background: #f6fdec;     /* 아주 연한 연두색 배경 */
   border-radius: 24px;
   padding: 10px 20px;
 }
@@ -328,6 +334,17 @@
 }
 
 /* Hi, Visitor!: 글자 하나씩 위로 점프하는 물결 애니메이션 */
+/* 스케치북에 슥 칠한 하늘색 마커 패치 */
+.jump-title {
+  width: fit-content;
+  margin: 0 auto;          /* 글자폭만큼만 감싸고 가운데 정렬 */
+  padding: 20px 22px;      /* 위아래 넉넉하게 */
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%2060'%20preserveAspectRatio='none'%3E%3Cpath%20d='M8%2030%20Q5%2012%2022%209%20Q100%203%20182%2011%20Q197%2015%20193%2033%20Q197%2051%20174%2053%20Q100%2059%2024%2049%20Q3%2046%208%2030%20Z'%20fill='%23bfe6ff'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  transform: rotate(-1.2deg); /* 손그림 느낌으로 살짝 기울임 */
+}
+
 .jump-title span {
   display: inline-block; /* transform 적용되려면 inline-block 필요 */
   color:rgb(255, 79, 79);
@@ -350,63 +367,117 @@
   }
 }
 
-/* [수정] 버튼 배경색 지정 */
-/* count 옆 +/- 버튼: 남색 + 둥근 알약형 */
+/* 마을 투표 버튼(같이 살래/갈래): 네모로 깔끔하게 */
 .count-btn {
-  background: #1a237e;
-  color: #fff;
+  background: #f2b705;      /* 노랑 테마에 어울리는 진한 노랑 */
+  color: #4a3b00;
   border: none;
-  padding: 8px 18px;      /* 버튼 크기(안쪽 여백) */
-  border-radius: 999px;   /* 알약 모양 */
-  font-size: 16px;
+  padding: 10px 18px;
+  border-radius: 8px;      /* 살짝만 둥근 네모 */
+  font-size: 15px;
+  font-weight: 700;
   cursor: pointer;
+  transition: filter 0.2s;
+}
+.count-btn:hover {
+  filter: brightness(1.05);
 }
 
-/* reset 버튼: Hi, Visitor! 제목과 같은 빨강 + 둥근 알약형 */
+/* reset 버튼: 네모, 눈에 안 띄게 회색 */
 .reset-btn {
-  background: rgb(255, 79, 79);
-  color: #fff;
+  background: #e6e2c9;
+  color: #6b5f2e;
   border: none;
-  padding: 8px 18px;
-  border-radius: 999px;
-  font-size: 18px;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
   cursor: pointer;
+  margin-top: 6px;
 }
-
-/* Likes(👍Click Me) 버튼: 연보라색 + 크게 */
-.like-btn {
-  background: #b39ddb;
-  color: #fff;
-  border: none;
-  padding: 14px 24px;     /* 더 큰 버튼 */
-  border-radius: 12px;
-  font-size: 16px;
-  cursor: pointer;
+.reset-btn:hover {
+  filter: brightness(0.97);
 }
 
 
 .app-title {
-  color: #ffbf00;
+  color: #7a5900;          /* 노란 패치 위에서 읽히도록 진한 색 */
   font-size: 2rem;
   text-align: center;
+
+  /* 스케치북에 슥 칠한 노란 마커 패치 */
+  width: fit-content;
+  margin: 48px auto 0;     /* 상단 간격 + 글자폭만큼만 감싸고 가운데 정렬 */
+  padding: 22px 24px;      /* 위아래 넉넉하게 */
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%2060'%20preserveAspectRatio='none'%3E%3Cpath%20d='M8%2030%20Q5%2012%2022%209%20Q100%203%20182%2011%20Q197%2015%20193%2033%20Q197%2051%20174%2053%20Q100%2059%2024%2049%20Q3%2046%208%2030%20Z'%20fill='%23ffe39a'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  transform: rotate(-1.5deg); /* 손그림 느낌으로 살짝 기울임 */
 }
 
 /* [수정] 카드 + NYC 사진을 가로로 나란히 배치 */
 .counter-row {
   display: flex;
-  gap: 20px;
-  align-items: stretch;     /* 카드와 사진 높이를 같게 맞춤 */
+  gap: 32px;
+  align-items: center;      /* 사진(왼쪽) 옆에 나뭇잎 카드 세로 가운데 */
   justify-content: center;
-  flex-wrap: wrap;          /* 화면 좁으면 사진이 아래로 내려감 */
+  flex-wrap: wrap;          /* 화면 좁으면 아래로 내려감 */
 }
 
-/* [수정] Visitor Count + count 버튼 + reset를 담은 카드: 아주 밝은 회색 배경 */
-.counter-card {
-  background: #fafafa;      /* 아주 밝은 회색(조금 더 밝게) */
-  border: 1px solid #ececec;
-  border-radius: 16px;
-  padding: 24px 32px;
-  max-width: 480px;
+/* 방문자 수: leaf.png(동물의 숲 나뭇잎) 위에 숫자 표기. 이미지는 인라인 style로 지정 */
+/* 연두색 카드: 좌상단 텍스트 + 우하단 나뭇잎 (작게, 그림자 없음)
+   overflow는 visible이라 테이프가 카드 밖으로 삐져나옴 */
+.visitor-card {
+  position: relative;
+  background: #e4f7cd;                   /* 연두색 배경 */
+  border: 1px solid #cbe9a8;
+  border-radius: 18px;
+  width: 240px;
+  height: 175px;
+  box-sizing: border-box;
+  align-self: center;                    /* 사진 옆 세로 가운데 */
+}
+
+/* 왼쪽 중간 높이 텍스트 */
+.visitor-label {
+  position: absolute;
+  top: 50%;
+  left: 24px;
+  transform: translateY(-50%);           /* 세로 중간 정렬 */
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #2f6b2a;                        /* 진한 초록 글자 */
+}
+.visitor-num {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #2e9d43;
+  margin-inline-start: 4px;
+}
+
+/* 우하단 나뭇잎 장식 (카드 안쪽 모서리) */
+.leaf-deco {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  width: 110px;
+  height: auto;
+  pointer-events: none;
+}
+
+/* 세로 마스킹 테이프 — 카드 위로 삐져나와 붙인 느낌 */
+.tape {
+  position: absolute;
+  top: -34px;                            /* 카드 위로 삐져나옴 */
+  left: 50%;
+  transform: translateX(-50%) rotate(4deg);
+  width: 34px;                           /* 세로 테이프: 좁고 길게 */
+  height: 74px;
+  background: rgba(255, 224, 130, 0.72); /* 반투명 노란 테이프 */
+  border-top: 1px dashed rgba(0, 0, 0, 0.08);
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+  z-index: 1;
 }
 
 /* 카드 오른쪽 NYC 사진들 + 캡션(세로 배치) */
@@ -417,13 +488,12 @@
 }
 .photo-images {
   display: flex;
-  gap: 12px;
-  flex: 1;                  /* 사진 줄이 카드 높이를 채움 */
+  gap: 14px;
 }
 .side-photo {
-  width: 160px;
-  height: 100%;             /* 카드와 같은 높이로 꽉 채움 */
-  object-fit: cover;        /* 비율 유지하며 잘라 채움 */
+  width: 240px;             /* 사진 크게 */
+  height: 240px;
+  object-fit: cover;        /* 비율 유지하며 정사각형으로 채움 */
   border-radius: 12px;
   box-shadow: var(--shadow);
 }
