@@ -375,8 +375,8 @@
 
 /* 마을 투표 버튼(같이 살래/갈래): 네모로 깔끔하게 */
 .count-btn {
-  background: #f2b705;      /* 노랑 테마에 어울리는 진한 노랑 */
-  color: #4a3b00;
+  background: #e0d5f7;      /* 조금 더 진한 연보라 */
+  color: #5a4b85;
   border: none;
   padding: 10px 16px;
   border-radius: 8px;      /* 살짝만 둥근 네모 */
@@ -386,6 +386,7 @@
   transition: filter 0.2s;
   flex: 1 1 0;             /* 두 버튼이 폭을 반씩 나눠 가짐 */
   line-height: 1.35;       /* <br/>로 두 줄이 될 때 줄간격 */
+  white-space: nowrap;     /* 내가 넣은 <br/>에서만 줄바꿈(추가 wrap 방지) */
 }
 .count-btn:hover {
   filter: brightness(1.05);

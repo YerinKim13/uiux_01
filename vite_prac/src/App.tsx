@@ -18,7 +18,7 @@ type AppProps = {title?: string}
 
 function App({ title }: AppProps) {
   const [visitors, setVisitors] = useState<number | null>(null)
-  const [likes, setLikes] = useState(0)
+  const [likes, setLikes] = useState(() => Number(localStorage.getItem('village-likes') ?? '0'))
   const bumpedRef = useRef(false)
 
   // 사이트 방문 시 방문자 수 자동 증가(전역 카운터 API, 실패하면 localStorage로 대체)
@@ -45,6 +45,11 @@ function App({ title }: AppProps) {
       setVisitors(local)
     })()
   }, [])
+
+  // 좋아요 누적 저장(새로고침해도 값 유지)
+  useEffect(() => {
+    localStorage.setItem('village-likes', String(likes))
+  }, [likes])
   return (
     <>
       
@@ -103,11 +108,11 @@ function App({ title }: AppProps) {
       <div className="card card-sky">
         <h2 className="card-title"> 🦁🐯🐻‍❄️🐨 외부 방문자 출입가능요건 🐷🐻🐱🐮</h2>
         <p className="card-text"> 🐾 반드시 맛난 것 혹은 멋진 것을 준비하세요!<br></br>
-          🐾 마을 전입을 원할 경우, 마을 주민들과 친해져야 신청이 가능합니다.
+          🐾 마을 전입을 원할 경우, <br></br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;마을 주민들과 친해져야 신청이 가능합니다.
         </p>
       </div>
       <div className="card card-yellow">
-        <h2 className="card-title"> ❤️ : {likes}</h2>
+        <h2 className="card-title"> ❤️❤️❤️ : {likes}</h2>
         <div className="button-row">
           <button
             type="button"
