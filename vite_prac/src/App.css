@@ -286,6 +286,51 @@
   transform: scale(1.25);
 }
 
+/* 캐릭터 래퍼(아이콘 + 말풍선) */
+.char {
+  position: relative;
+  display: inline-block;
+}
+
+/* hover 시 아이콘 위에 뜨는 말풍선 */
+.bubble {
+  position: absolute;
+  bottom: 100%;                 /* 아이콘 위쪽 */
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  margin-bottom: 8px;
+  background: #ffffff;
+  color: #3a2a6b;
+  padding: 7px 13px;
+  border-radius: 16px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  opacity: 0;                   /* 평소엔 숨김 */
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* 말풍선 꼬리 */
+.bubble::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 7px solid transparent;
+  border-top-color: #ffffff;
+}
+
+/* 아이콘에 커서 올리면 말풍선 등장 */
+.char:hover .bubble {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 
 
 /* [수정] Summary·Likes 카드를 가로로 나란히 배치 */

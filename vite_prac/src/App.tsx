@@ -58,10 +58,22 @@ function App({ title }: AppProps) {
         {/* [수정] 상단 아이콘: 강아지 → 바닐라/잭슨/리처드/탁호 4마리로 교체.
             hover 시 흔들림은 App.css의 .dog-band .logo:hover */}
         <div className="dog-band">
-          <img src={jackson} className="logo" alt="잭슨" />
-          <img src={vanilla} className="logo" alt="바닐라" />
-          <img src={Lichard} className="logo" alt="리처드" />
-          <img src={takho} className="logo" alt="탁호" />
+          <span className="char">
+            <img src={jackson} className="logo" alt="잭슨" />
+            <span className="bubble">뭐가 문제야<br />누가 괴롭혔어</span>
+          </span>
+          <span className="char">
+            <img src={vanilla} className="logo" alt="바닐라" />
+            <span className="bubble">왔어-? 오늘은 어땠어?</span>
+          </span>
+          <span className="char">
+            <img src={Lichard} className="logo" alt="리처드" />
+            <span className="bubble">조금만 더 힘내자! 꽥!</span>
+          </span>
+          <span className="char">
+            <img src={takho} className="logo" alt="탁호" />
+            <span className="bubble">맛있는 거 먹자!<br />내가 다 만들어줄게~</span>
+          </span>
         </div>
       </div>
       <section id="center">
