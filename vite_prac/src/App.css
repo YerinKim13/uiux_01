@@ -409,10 +409,16 @@
   max-width: 480px;
 }
 
-/* 카드 오른쪽 NYC 사진들 */
+/* 카드 오른쪽 NYC 사진들 + 캡션(세로 배치) */
 .counter-photos {
   display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.photo-images {
+  display: flex;
   gap: 12px;
+  flex: 1;                  /* 사진 줄이 카드 높이를 채움 */
 }
 .side-photo {
   width: 160px;
@@ -420,6 +426,15 @@
   object-fit: cover;        /* 비율 유지하며 잘라 채움 */
   border-radius: 12px;
   box-shadow: var(--shadow);
+}
+
+/* 사진 아래 캡션 */
+.photo-caption {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #6b6375;
+  font-style: italic;
+  margin: 0;
 }
 
 

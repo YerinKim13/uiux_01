@@ -4,7 +4,7 @@ import viteLogo from './assets/vite.svg'
 // 상단 아이콘: 강아지(dog1,dog2) → 바닐라/잭슨/쭈니/탁호로 교체
 import vanilla from './assets/바닐라.png'
 import jackson from './assets/잭슨.png'
-import jjuni from './assets/쭈니.png'
+import Lichard from './assets/리처드.png'
 import takho from './assets/탁호.png'
 import nyc1 from './assets/NYC1.jpg'
 import nyc2 from './assets/NYC2.jpg'
@@ -20,12 +20,12 @@ function App({ title }: AppProps) {
       
       <div>
         <h1 className="app-title">{title}</h1>
-        {/* [수정] 상단 아이콘: 강아지 → 바닐라/잭슨/쭈니/탁호 4마리로 교체.
+        {/* [수정] 상단 아이콘: 강아지 → 바닐라/잭슨/리처드/탁호 4마리로 교체.
             hover 시 흔들림은 App.css의 .dog-band .logo:hover */}
         <div className="dog-band">
-          <img src={vanilla} className="logo" alt="바닐라" />
           <img src={jackson} className="logo" alt="잭슨" />
-          <img src={jjuni} className="logo" alt="쭈니" />
+          <img src={vanilla} className="logo" alt="바닐라" />
+          <img src={Lichard} className="logo" alt="리처드" />
           <img src={takho} className="logo" alt="탁호" />
         </div>
       </div>
@@ -42,7 +42,7 @@ function App({ title }: AppProps) {
           </h1>
           <p>
             {/* [수정] 기존 <code> 태그 제거 → 회색 네모칸 없이 일반 텍스트로 표시 */}
-            저희는 바닐라, 잭슨, 쭈니, 탁호와 함께하는 작은 마을입니다. <br />
+            저희는 바닐라, 잭슨, 리차드, 탁호와 함께하는 작은 마을입니다. <br />
           </p>
         </div>
         {/* [수정] '방문자 숫자'는 볼드(count-text), 숫자만 span으로 감싸 크게/형광색 강조(count-number) */}
@@ -72,8 +72,11 @@ function App({ title }: AppProps) {
       <div> <button className="reset-btn" onClick={() => setCount(0)}>reset</button> </div>
         </div>
         <div className="counter-photos">
-          <img src={nyc1} className="side-photo" alt="NYC1" />
-          <img src={nyc2} className="side-photo" alt="NYC2" />
+          <div className="photo-images">
+            <img src={nyc1} className="side-photo" alt="NYC1" />
+            <img src={nyc2} className="side-photo" alt="NYC2" />
+          </div>
+          <p className="photo-caption">우리 마을의 모습</p>
         </div>
       </div>
       </section>
@@ -89,8 +92,7 @@ function App({ title }: AppProps) {
       </div>
       <div className="card card-yellow">
         <h2 className="card-title"> ❤️ : {likes}</h2>
-        <button className="like-btn" onClick={() => setLikes((likes) => likes + 1)}>이 마을이 
-          마음에 들어요!</button>
+        <button className="like-btn" onClick={() => setLikes((likes) => likes + 1)}>이 마을이<br></br>마음에 들어요!</button>
       </div>
       </div>
       <div className="ticks"></div>
