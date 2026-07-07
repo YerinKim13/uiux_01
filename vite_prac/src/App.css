@@ -269,6 +269,7 @@
   background: #f6fdec;     /* 아주 연한 연두색 배경 */
   border-radius: 24px;
   padding: 10px 20px;
+  margin: 40px 0;          /* 위아래 여백 — 제목/아래 내용과 안 붙게 */
 }
 
 /* 상단 밴드 안 아이콘(바닐라/잭슨/쭈니/탁호) 크기·간격 */
@@ -313,14 +314,19 @@
 .card-sky {
   background: #e1f5fe;
   border: 1px solid #b3e5fc;
-  flex: 2 1 0;   /* Likes보다 2배 넓게 */
+  flex: 2.2 1 0;   /* 제목이 한 줄에 들어오도록 넓게 */
+}
+/* 하늘 카드 제목: 한 줄 유지 */
+.card-sky .card-title {
+  white-space: nowrap;
+  font-size: 1.2rem;
 }
 
 /* 노란색 상자 (Likes) — 더 좁게 + 내용 가운데 정렬 */
 .card-yellow {
   background: #fff9c4;
   border: 1px solid #fff176;
-  flex: 0.6 1 0;      /* Summary보다 더 작게 */
+  flex: 1 1 0;        /* Likes 카드 조금 줄임 */
   text-align: center; /* 제목/버튼 가운데 정렬 */
 }
 
@@ -337,8 +343,8 @@
 /* 스케치북에 슥 칠한 하늘색 마커 패치 */
 .jump-title {
   width: fit-content;
-  margin: 0 auto;          /* 글자폭만큼만 감싸고 가운데 정렬 */
-  padding: 20px 22px;      /* 위아래 넉넉하게 */
+  margin: 0 auto 32px;     /* 아래 여백 32px(마진이라 패치는 안 커짐) */
+  padding: 6px 22px;       /* 위아래 얇게 */
   background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%2060'%20preserveAspectRatio='none'%3E%3Cpath%20d='M8%2030%20Q5%2012%2022%209%20Q100%203%20182%2011%20Q197%2015%20193%2033%20Q197%2051%20174%2053%20Q100%2059%2024%2049%20Q3%2046%208%2030%20Z'%20fill='%23bfe6ff'/%3E%3C/svg%3E");
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -372,12 +378,14 @@
   background: #f2b705;      /* 노랑 테마에 어울리는 진한 노랑 */
   color: #4a3b00;
   border: none;
-  padding: 10px 18px;
+  padding: 10px 16px;
   border-radius: 8px;      /* 살짝만 둥근 네모 */
   font-size: 15px;
   font-weight: 700;
   cursor: pointer;
   transition: filter 0.2s;
+  flex: 1 1 0;             /* 두 버튼이 폭을 반씩 나눠 가짐 */
+  line-height: 1.35;       /* <br/>로 두 줄이 될 때 줄간격 */
 }
 .count-btn:hover {
   filter: brightness(1.05);
@@ -388,12 +396,12 @@
   background: #e6e2c9;
   color: #6b5f2e;
   border: none;
-  padding: 8px 20px;
+  padding: 8px 56px;       /* 가로만 더 길게 */
   border-radius: 8px;
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
-  margin-top: 6px;
+  margin-top: 10px;
 }
 .reset-btn:hover {
   filter: brightness(0.97);
@@ -408,7 +416,7 @@
   /* 스케치북에 슥 칠한 노란 마커 패치 */
   width: fit-content;
   margin: 48px auto 0;     /* 상단 간격 + 글자폭만큼만 감싸고 가운데 정렬 */
-  padding: 22px 24px;      /* 위아래 넉넉하게 */
+  padding: 7px 24px;       /* 위아래 얇게 */
   background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%2060'%20preserveAspectRatio='none'%3E%3Cpath%20d='M8%2030%20Q5%2012%2022%209%20Q100%203%20182%2011%20Q197%2015%20193%2033%20Q197%2051%20174%2053%20Q100%2059%2024%2049%20Q3%2046%208%2030%20Z'%20fill='%23ffe39a'/%3E%3C/svg%3E");
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -436,34 +444,50 @@
   height: 175px;
   box-sizing: border-box;
   align-self: center;                    /* 사진 옆 세로 가운데 */
+
+  /* 라벨+숫자를 하나로 묶어 세로 가운데 정렬(테이프 아래 여유) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 16px 16px;
+  text-align: center;
 }
 
-/* 왼쪽 중간 높이 텍스트 */
+/* 라벨 */
 .visitor-label {
-  position: absolute;
-  top: 50%;
-  left: 24px;
-  transform: translateY(-50%);           /* 세로 중간 정렬 */
-  margin: 0;
-  font-size: 1.05rem;
+  position: relative;
+  z-index: 1;
+  margin: 0 0 6px;
+  font-size: 1rem;
   font-weight: 700;
   color: #2f6b2a;                        /* 진한 초록 글자 */
 }
+/* 숫자(라벨 아래, 크게) */
 .visitor-num {
-  font-size: 1.35rem;
+  position: relative;
+  z-index: 1;
+  font-size: 2.6rem;
+  line-height: 1;
   font-weight: 800;
   color: #2e9d43;
-  margin-inline-start: 4px;
 }
 
-/* 우하단 나뭇잎 장식 (카드 안쪽 모서리) */
+/* 우하단 나뭇잎 장식 (텍스트 뒤, 카드 모서리) */
 .leaf-deco {
   position: absolute;
   right: 6px;
   bottom: 6px;
-  width: 110px;
+  width: 84px;
   height: auto;
+  z-index: 0;
+  opacity: 0.9;
   pointer-events: none;
+}
+
+/* 캐릭터 얼굴 아이콘: 원본 색 그대로, 비율 유지 */
+.face-icon {
+  object-fit: contain;
 }
 
 /* 세로 마스킹 테이프 — 카드 위로 삐져나와 붙인 느낌 */

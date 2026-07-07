@@ -1,20 +1,23 @@
 import { useState, useEffect, useRef } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-// 상단 아이콘: 강아지(dog1,dog2) → 바닐라/잭슨/쭈니/탁호로 교체
+// 상단 아이콘: 강아지(dog1,dog2) → 바닐라/잭슨/리차드/탁호로 교체
 import vanilla from './assets/바닐라.png'
 import jackson from './assets/잭슨.png'
 import Lichard from './assets/리처드.png'
 import takho from './assets/탁호.png'
+import vanillaFace from './assets/바닐라_얼굴.png'
+import jacksonFace from './assets/잭슨_얼굴.png'
+import lichardFace from './assets/리처드_얼굴.png'
+import takhoFace from './assets/탁호_얼굴.png'
 import nyc1 from './assets/NYC1.jpg'
 import nyc2 from './assets/NYC2.jpg'
 import leaf from './assets/leaf_transparent.png'
+import nintendo from './assets/nintendo.svg'
 import './App.css'
 
 type AppProps = {title?: string}
 
 function App({ title }: AppProps) {
-  const [visitors, setVisitors] = useState<number | null>(null)
+  const [visitors, setVisitors] = useState<number | null>(null)
   const [likes, setLikes] = useState(0)
   const bumpedRef = useRef(false)
 
@@ -42,8 +45,8 @@ function App({ title }: AppProps) {
       setVisitors(local)
     })()
   }, [])
-  return (
-    <>
+  return (
+    <>
       
       <div>
         <h1 className="app-title">{title}</h1>
@@ -56,22 +59,22 @@ function App({ title }: AppProps) {
           <img src={takho} className="logo" alt="탁호" />
         </div>
       </div>
-      <section id="center">
-        <div>
-          {/* [수정] Get started: 글자를 하나씩 span으로 쪼개고 animationDelay를
+      <section id="center">
+        <div>
+          {/* [수정] Get started: 글자를 하나씩 span으로 쪼개고 animationDelay를
               0.08초씩 밀어서 왼쪽부터 순차로 점프하는 물결 효과(App.css의 letter-jump) */}
           <h1 className="jump-title">
-            {'Hi, Visitor!'.split('').map((ch, i) => (
+            {'Hi, Visitors!!'.split('').map((ch, i) => (
               <span key={i} style={{ animationDelay: `${i * 0.08}s` }}>
-                {ch === ' ' ? ' ' : ch}
+                {ch === ' ' ? ' ' : ch}
               </span>
             ))}
           </h1>
-          <p>
-            {/* [수정] 기존 <code> 태그 제거 → 회색 네모칸 없이 일반 텍스트로 표시 */}
-            이곳은 바닐라, 잭슨, 리차드, 탁호와 함께하는 작은 마을입니다. <br />
-          </p>
-        </div>
+          <p>
+            {/* [수정] 기존 <code> 태그 제거 → 회색 네모칸 없이 일반 텍스트로 표시 */}
+            이곳은 바닐라, 잭슨, 리처드, 탁호와 함께하는 작은 마을입니다. <br />
+          </p>
+        </div>
         {/* [수정] '방문자 숫자'는 볼드(count-text), 숫자만 span으로 감싸 크게/형광색 강조(count-number) */}
         {/* [수정] Visitor Count + count 버튼 + reset를 하나의 카드로 묶음(배경 밝은 회색) */}
         {/* [수정] 카드 + NYC 사진을 가로로 나란히 배치하는 행 */}
@@ -87,21 +90,20 @@ function App({ title }: AppProps) {
         {/* 방문자 수: 연두색 카드 — 좌상단 텍스트 + 우하단 나뭇잎 + 세로 테이프 */}
         <div className="visitor-card">
           <span className="tape"></span>
-          <p className="visitor-label">
-            오늘의 방문자 : <span className="visitor-num">{visitors ?? '…'}</span>
-          </p>
+          <p className="visitor-label">오늘의 방문자</p>
+          <span className="visitor-num">{visitors ?? '…'}</span>
           <img className="leaf-deco" src={leaf} alt="" />
         </div>
       </div>
-      </section>
+      </section>
       {/* [수정] 두 요약 카드를 색상 상자로 구분 + 여백 추가.
           card-sky=하늘색, card-yellow=노란색 (스타일은 App.css) */}
       {/* [수정] Summary·Likes 카드를 가로로 나란히 배치하는 행 */}
       <div className="card-row">
       <div className="card card-sky">
-        <h2 className="card-title"> 🐾 외부 방문자 출입가능요건 </h2>
-        <p className="card-text">반드시 맛난 것 혹은 멋진 것을 준비하세요!<br></br>
-          마을 전입을 원할 경우, 마을 주민들과 친해져야 신청이 가능합니다.
+        <h2 className="card-title"> 🦁🐯🐻‍❄️🐨 외부 방문자 출입가능요건 🐷🐻🐱🐮</h2>
+        <p className="card-text"> 🐾 반드시 맛난 것 혹은 멋진 것을 준비하세요!<br></br>
+          🐾 마을 전입을 원할 경우, 마을 주민들과 친해져야 신청이 가능합니다.
         </p>
       </div>
       <div className="card card-yellow">
@@ -112,106 +114,82 @@ function App({ title }: AppProps) {
             className="count-btn"
             onClick={() => setLikes((likes) => likes + 1)}
           >
-            이 마을에 같이 살래!😊
+            이 마을에<br />같이 살래!<br />😊
           </button>
           <button
             type="button"
             className="count-btn"
             onClick={() => setLikes((likes) => likes - 1)}
           >
-            다른 마을로 갈래🥲
+            다른 마을로<br />갈래<br />🥲
           </button>
         </div>
         <button className="reset-btn" onClick={() => setLikes(0)}>reset</button>
       </div>
       </div>
-      <div className="ticks"></div>
+      <div className="ticks"></div>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">  {/* 여기서 target="_blank" 있으면 새탭에서, 없으면 기존탭에서 열림 */}
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the 'Animal Crossing' community</p>
-          <ul>
-            <li>
-              <a href="https://namu.wiki/w/%EB%AA%A8%EC%97%AC%EB%B4%90%EC%9A%94%20%EB%8F%99%EB%AC%BC%EC%9D%98%20%EC%88%B2" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                Aboutn Animal Crossing
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      <section id="next-steps">
+        <div id="docs">
+          <svg className="icon" role="presentation" aria-hidden="true">
+            <use href="/icons.svg#documentation-icon"></use>
+          </svg>
+          <h2>Thank you for visiting!</h2>
+          <p>Have a great day!</p>
+          <ul>
+            <li>
+              <a href="https://www.animal-crossing.com/" target="_blank">
+                <img className="logo" src={leaf} alt="Animal Crossing" />
+                Animal Crossing
+              </a>
+            </li>
+            <li>
+              <a href="https://www.nintendo.com/" target="_blank">
+                <img className="logo" src={nintendo} alt="Nintendo" />
+                Nintendo
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div id="social">
+          <svg className="icon" role="presentation" aria-hidden="true">
+            <use href="/icons.svg#social-icon"></use>
+          </svg>
+          <h2>Connect with us</h2>
+          <p>Join the 'Animal Crossing' community</p>
+          <ul>
+            <li>
+              <a href="https://namu.wiki/w/바닐라(동물의%20숲%20시리즈)" target="_blank">
+                <img className="button-icon face-icon" src={vanillaFace} alt="바닐라" />
+                Vanilla
+              </a>
+            </li>
+            <li>
+              <a href="https://namu.wiki/w/잭슨(동물의%20숲%20시리즈)" target="_blank">
+                <img className="button-icon face-icon" src={jacksonFace} alt="잭슨" />
+                Jackson
+              </a>
+            </li>
+            <li>
+              <a href="https://namu.wiki/w/리처드(동물의%20숲%20시리즈)" target="_blank">
+                <img className="button-icon face-icon" src={lichardFace} alt="리처드" />
+                Richard
+              </a>
+            </li>
+            <li>
+              <a href="https://namu.wiki/w/탁호" target="_blank">
+                <img className="button-icon face-icon" src={takhoFace} alt="탁호" />
+                Takho
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      <div className="ticks"></div>
+      <section id="spacer"></section>
+    </>
+  )
 }
 
 export default App
