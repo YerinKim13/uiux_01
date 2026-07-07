@@ -1,0 +1,136 @@
+/* 귀여운 폰트 불러오기 — 영어:Fredoka, 한글:Do Hyeon (반드시 파일 최상단) */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Do+Hyeon&display=swap');
+
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #f0f0f0; /* 배경 연한 회색 */
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.1);
+  --accent-border: rgba(170, 59, 255, 0.5);
+  --social-bg: rgba(244, 243, 236, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  /* 영어=Fredoka, 한글=Do Hyeon. 한글은 Fredoka에 없어서 자동으로 Do Hyeon으로 넘어감 */
+  --sans: 'Fredoka', 'Do Hyeon', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: 'Fredoka', 'Do Hyeon', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #6b6375; /* 밝은 배경에 맞춰 글자 어둡게 */
+    --text-h: #08060d;
+    --bg: #f0f0f0; /* 다크모드에서도 연한 회색 */
+    --border: #2e303a;
+    --code-bg: #1f2028;
+    --accent: #c084fc;
+    --accent-bg: rgba(192, 132, 252, 0.15);
+    --accent-border: rgba(192, 132, 252, 0.5);
+    --social-bg: rgba(47, 48, 58, 0.5);
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+
+  #social .button-icon {
+    filter: invert(1) brightness(2);
+  }
+}
+
+#root {
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border-inline: 1px solid var(--border);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+
+  /* 동물의 숲 느낌 배경: 옅은 구름 + 연둣빛 언덕 + 하늘 그라디언트(은은하게) */
+  background:
+    /* 구름 두 개 */
+    radial-gradient(38% 22% at 22% 20%, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0) 70%),
+    radial-gradient(30% 18% at 78% 14%, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 70%),
+    /* 좌우 언덕 */
+    radial-gradient(70% 45% at 12% 100%, #cdeab8 0%, rgba(205, 234, 184, 0) 60%),
+    radial-gradient(70% 45% at 88% 100%, #cdeab8 0%, rgba(205, 234, 184, 0) 60%),
+    /* 가운데 큰 언덕 */
+    radial-gradient(120% 55% at 50% 100%, #d8efc6 0%, rgba(216, 239, 198, 0) 62%),
+    /* 하늘 → 연둣빛 바탕 */
+    linear-gradient(180deg, #e6f5ff 0%, #f2fbef 55%, #e9f6dd 100%);
+  background-attachment: fixed; /* 스크롤해도 배경은 그대로(은은하게) */
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+p {
+  margin: 0;
+}
+
+/* 버튼은 기본적으로 페이지 폰트를 상속받지 않아 따로 지정(다른 영어와 동일하게 Fredoka) */
+button {
+  font-family: var(--sans);
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
